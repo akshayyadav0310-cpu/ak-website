@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akshay Yadav - Power Engineering Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4c63d2;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #4c63d2;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #4c63d2;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            display: none;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        /* About Me Section (Landing Page) */
+        #about {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #4c63d2;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Content Section */
+        .about-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .languages {
+            margin-top: 2rem;
+        }
+
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Education Timeline */
+        .education-timeline {
+            margin-top: 3rem;
+            padding: 2rem 0;
+        }
+
+        .timeline-title {
+            font-size: 2rem;
+            color: #4c63d2;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #4c63d2;
+            border: 4px solid white;
+            border-radius: 50%;
+            top: 15px;
+            left: 50%;
+            margin-left: -10px;
+            z-index: 3;
+            box-shadow: 0 2px 10px rgba(76, 99, 210, 0.3);
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+            position: relative;
+            border-radius: 15px;
+            width: 45%;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            left: 55%;
+        }
+
+        .timeline-year {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #4c63d2;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-degree {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-school {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #4c63d2;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Blog Posts Section (Experience + Blog) */
+        .blog-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-btn {
+            background: transparent;
+            border: 2px solid #4c63d2;
+            color: #4c63d2;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: #4c63d2;
+            color: white;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-post {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .blog-excerpt {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .blog-category {
+            background: #4c63d2;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .read-more {
+            color: #4c63d2;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* Experience Items */
+        .experience-item {
+            border-left: 3px solid #4c63d2;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: #4c63d2;
+            border-radius: 50%;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .experience-duration {
+            background: #f0f2ff;
+            color: #4c63d2;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .experience-company {
+            font-weight: 600;
+            color: #4c63d2;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-location {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Blog Post Detail */
+        .blog-post-detail {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .blog-post-detail.active {
+            display: block;
+        }
+
+        .blog-post-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .blog-post-title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .blog-post-meta {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .blog-post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .blog-post-content h2 {
+            color: #4c63d2;
+            margin: 2rem 0 1rem 0;
+            font-size: 1.8rem;
+        }
+
+        .blog-post-content h3 {
+            color: #333;
+            margin: 1.5rem 0 0.5rem 0;
+            font-size: 1.4rem;
+        }
+
+        .blog-post-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .back-to-blog {
+            display: inline-block;
+            background: #4c63d2;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: background 0.3s ease;
+        }
+
+        .back-to-blog:hover {
+            background: #3d4ed8;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4c63d2;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 99, 210, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .timeline::after {
+                left: 20px;
+            }
+
+            .timeline-item::after {
+                left: 20px;
+                margin-left: -10px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                left: 60px !important;
+            }
+
+            .education-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">Akshay Yadav</div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showSection('about')">About Me</a></li>
+                <li><a href="#" onclick="showSection('blog')">Blog Posts</a></li>
+                <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- About Me Section (Landing Page) -->
+    <section id="about" class="active">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Akshay Yadav</h1>
+                <p class="hero-subtitle">MSc Power Engineering at TUM</p>
+                <p class="hero-description">
+                    Specializing in power systems, grid integration, and electrical machine design. 
+                    Passionate about advancing renewable energy technologies and grid modernization.
+                </p>
+                <a href="#" onclick="showSection('contact')" class="cta-button">Get In Touch</a>
+            </div>
+
+            <div class="about-content">
+                <div class="about-content-text">
+                    <h3>Professional Profile</h3>
+                    <p>I am a Master's student in Power Engineering at the Technical University of Munich (TUM), with extensive experience in power systems analysis, grid integration, and electrical engineering. My work spans from traditional power systems to cutting-edge inverter-based resources and microgrid technologies.</p>
+                </div>
+
+                <!-- Education Timeline -->
+                <div class="education-timeline">
+                    <h2 class="timeline-title">Education Journey</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-year">2025</div>
+                                <div class="timeline-degree">Master of Science - Power Engineering</div>
+                                <div class="timeline-school">Technical University of Munich (TUM)</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-year">2018</div>
+                                <div class="timeline-degree">Bachelor of Engineering - Electrical Engineering</div>
+                                <div class="timeline-school">Sarvajanik College of Engineering & Technology</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-year">2015</div>
+                                <div class="timeline-degree">Diploma in Electrical Engineering</div>
+                                <div class="timeline-school">Gujarat Technological University (GTU)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts Section (Experience + Blog) -->
+    <section id="blog">
+        <div class="container">
+            <div class="content-section">
+                <h2 class="section-title">Blog Posts & Experience</h2>
+                
+                <div class="blog-categories">
+                    <button class="category-btn active" onclick="filterPosts('all')">All Posts</button>
+                    <button class="category-btn" onclick="filterPosts('experience')">Professional Experience</button>
+                    <button class="category-btn" onclick="filterPosts('insights')">Technical Insights</button>
+                </div>
+
+                <div class="blog-grid">
+                    <!-- Experience Posts -->
+                    <article class="blog-post" data-category="experience">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=200&fit=crop&crop=center" alt="Engineering workspace" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="blog-content">
+                            <h3 class="blog-title">Working Student at TSCNET Services GmbH</h3>
+                            <p class="blog-excerpt">Currently contributing to service engineering projects in the power systems domain, applying theoretical knowledge to real-world engineering challenges in Munich.</p>
+                            <div class="blog-meta">
+                                <span class="blog-category">Experience</span>
+                                <a href="#" onclick="showBlogPost('exp1')" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-post" data-category="experience">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=400&h=200&fit=crop&crop=center" alt="Research and development" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="blog-content">
+                            <h3 class="blog-title">Master Thesis at TUM T&D Chair</h3>
+                            <p class="blog-excerpt">Dynamic Modeling and Comparative Analysis of Short-Circuit Responses in Low-Voltage Isolated Grids: From Synchronous Generators to Inverter Dominance.</p>
+                            <div class="blog-meta">
+                                <span class="blog-category">Experience</span>
+                                <a href="#" onclick="showBlogPost('exp2')" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-post" data-category="experience">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=200&fit=crop&crop=center" alt="Aerospace engineering" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="blog-content">
+                            <h3 class="blog-title">Internship at Rolls-Royce</h3>
+                            <p class="blog-excerpt">Further Development of a Tool for Partial Discharge Inception Voltage Prediction in Electrical Machines for Aerospace Applications.</p>
+                            <div class="blog-meta">
+                                <span class="blog-category">Experience</span>
+                                <a href="#" onclick="showBlogPost('exp3')" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-post" data-category="experience">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=200&fit=crop&crop=center" alt="Solar panels" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="blog-content">
+                            <h3 class="blog-title">Canadian Solar EMEA - Product Management</h3>
+                            <p class="blog-excerpt">Supported product management initiatives and provided technical expertise for solar energy solutions across the EMEA region for over a year.</p>
+                            <div class="blog-meta">
+                                <span class="blog-category">Experience</span>
+                                <a href="#" onclick="showBlogPost('exp4')" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Technical Insights Posts -->
+                    <article class="blog-post" data-category="insights">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=200&fit=crop&crop=center" alt="Power grid infrastructure" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="blog-content">
+                            <h3 class="blog-title">The Future of Grid-Forming Inverters</h3>
+                            <p class="blog-excerpt">Exploring how grid-forming inverters are revolutionizing power system stability and enabling higher renewable energy penetration in modern grids.</p>
+                            <div class="blog-meta">
+                                <span class="blog-category">Insights</span>
+                                <a href="#" onclick="showBlogPost('post1')" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-post" data-category="insights">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=200&fit=crop&crop=center" alt="Electrical grid system" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="blog-content">
+                            <h3 class="blog-title">Short-Circuit Analysis in Microgrids</h3>
+                            <p class="blog-excerpt">Understanding the challenges and solutions for short-circuit protection in islanded microgrids with high inverter penetration.</p>
+                            <div class="blog-meta">
+                                <span class="blog-category">Insights</span>
+                                <a href="#" onclick="showBlogPost('post2')" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-post" data-category="insights">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop&crop=center" alt="Computer software interface" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="blog-content">
+                            <h3 class="blog-title">DIgSILENT PowerFactory: Best Practices</h3>
+                            <p class="blog-excerpt">Tips and tricks for effective power system modeling and simulation using DIgSILENT PowerFactory from my experience.</p>
+                            <div class="blog-meta">
+                                <span class="blog-category">Insights</span>
+                                <a href="#" onclick="showBlogPost('post3')" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Blog Post Details -->
+    <div id="exp1" class="blog-post-detail">
+        <div class="container">
+            <div class="content-section">
+                <a href="#" onclick="showSection('blog')" class="back-to-blog">← Back to Blog Posts</a>
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Working Student at TSCNET Services GmbH</h1>
+                    <div class="blog-post-meta">December 2024 - Present | Munich, Bavaria, Germany</div>
+                </div>
+                <div class="blog-post-content">
+                    <p>Currently working as a Working Student in Service Engineering at TSCNET Services GmbH, where I contribute to various power systems projects and service engineering initiatives. This role allows me to apply the theoretical knowledge gained during my Master's studies to real-world engineering challenges.</p>
+                    
+                    <h2>Key Responsibilities</h2>
+                    <p>In this position, I work closely with experienced engineers on service engineering projects, contributing to the development and optimization of power system solutions. The role provides valuable industry experience while complementing my academic pursuits.</p>
+                    
+                    <h3>Skills Development</h3>
+                    <p>This position has enhanced my practical understanding of service engineering principles and allowed me to work with industry-standard tools and methodologies in a professional environment.</p>
+                    
+                    <p>The experience at TSCNET Services GmbH is proving invaluable in bridging the gap between academic knowledge and practical industry applications in the power engineering field.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp2" class="blog-post-detail">
+        <div class="container">
+            <div class="content-section">
+                <a href="#" onclick="showSection('blog')" class="back-to-blog">← Back to Blog Posts</a>
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Master Thesis Research at TUM</h1>
+                    <div class="blog-post-meta">November 2024 - July 2025 | TUM Chair of Power Transmission and Distribution</div>
+                </div>
+                <div class="blog-post-content">
+                    <p>My master's thesis investigates the critical impact of increasing inverter-based resources on short-circuit behavior in low-voltage isolated grids. This research addresses one of the most pressing challenges in modern power systems as we transition from traditional synchronous generators to inverter-dominated grids.</p>
+                    
+                    <h2>Research Focus</h2>
+                    <p>The study focuses on "Dynamic Modeling and Comparative Analysis of Short-Circuit Responses in Low-Voltage Isolated Grids: From Synchronous Generators to Inverter Dominance." Using DIgSILENT PowerFactory for dynamic modeling and simulation, I analyze and compare the performance of various technologies including synchronous generators, grid-following and grid-forming inverters, and synchronous condensers.</p>
+                    
+                    <h3>Key Objectives</h3>
+                    <p>The research aims to enhance short-circuit capability by defining microgrid scenarios, extending dynamic models to represent their short-circuit characteristics, and analyzing critical factors such as fault behavior, generator contributions, and optimal sizing of battery inverters or synchronous condensers.</p>
+                    
+                    <h2>Expected Outcomes</h2>
+                    <p>This research will contribute valuable insights into optimizing short-circuit contributions in isolated grids, which is essential for the reliable operation of future power systems with high renewable energy penetration.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp3" class="blog-post-detail">
+        <div class="container">
+            <div class="content-section">
+                <a href="#" onclick="showSection('blog')" class="back-to-blog">← Back to Blog Posts</a>
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Internship at Rolls-Royce</h1>
+                    <div class="blog-post-meta">September 2024 - October 2024 | Munich, Bavaria, Germany</div>
+                </div>
+                <div class="blog-post-content">
+                    <p>During my internship at Rolls-Royce, I worked on the "Further Development of a Tool for Partial Discharge Inception Voltage Prediction in Electrical Machines for Aerospace Applications." This project focused on advancing predictive tools for electrical machine reliability in the demanding aerospace environment.</p>
+                    
+                    <h2>Project Overview</h2>
+                    <p>Partial discharge is a critical factor affecting the reliability and lifespan of electrical machines in aerospace applications. The project involved developing and enhancing tools that can predict the inception voltage of partial discharges, which is crucial for ensuring the safety and reliability of electrical systems in aircraft.</p>
+                    
+                    <h3>Technical Challenges</h3>
+                    <p>Working in the aerospace sector presented unique challenges, including stringent safety requirements, weight constraints, and the need for high reliability under extreme operating conditions. The tool development required deep understanding of electrical machine behavior and partial discharge phenomena.</p>
+                    
+                    <h2>Industry Experience</h2>
+                    <p>This internship provided valuable exposure to the aerospace industry's approach to electrical engineering challenges and the rigorous standards required for safety-critical applications. The experience enhanced my understanding of electrical machine design and reliability analysis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exp4" class="blog-post-detail">
+        <div class="container">
+            <div class="content-section">
+                <a href="#" onclick="showSection('blog')" class="back-to-blog">← Back to Blog Posts</a>
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Canadian Solar EMEA - Product Management</h1>
+                    <div class="blog-post-meta">October 2022 - March 2024 | Munich, Bavaria, Germany</div>
+                </div>
+                <div class="blog-post-content">
+                    <p>During my tenure as a Werkstudent in Product Management and Technical Support at Canadian Solar EMEA GmbH, I supported product management initiatives and provided technical expertise for solar energy solutions across the Europe, Middle East, and Africa region.</p>
+                    
+                    <h2>Role and Responsibilities</h2>
+                    <p>My role involved supporting the product management team with technical analysis, market research, and customer support activities. I worked closely with various stakeholders to ensure that solar energy solutions met the diverse requirements of the EMEA market.</p>
+                    
+                    <h3>Technical Support</h3>
+                    <p>Provided technical support to customers and internal teams, helping to resolve complex technical issues related to solar panel installations, system design, and performance optimization. This role enhanced my understanding of practical solar energy applications and customer needs.</p>
+                    
+                    <h2>Market Insights</h2>
+                    <p>The position provided valuable insights into the renewable energy market, regulatory requirements across different regions, and the challenges of deploying solar solutions at scale. This experience strengthened my commitment to advancing renewable energy technologies.</p>
+                    
+                    <p>Working at Canadian Solar for over a year provided comprehensive exposure to the solar industry and reinforced my passion for sustainable energy solutions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Technical Insights Blog Post Details -->
+    <div id="post1" class="blog-post-detail">
+        <div class="container">
+            <div class="content-section">
+                <a href="#" onclick="showSection('blog')" class="back-to-blog">← Back to Blog Posts</a>
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">The Future of Grid-Forming Inverters</h1>
+                    <div class="blog-post-meta">Published on December 15, 2024 by Akshay Yadav</div>
+                </div>
+                <div class="blog-post-content">
+                    <p>Grid-forming inverters represent a paradigm shift in how we approach power system stability and control. Unlike traditional grid-following inverters that rely on a strong grid reference, grid-forming inverters can establish and maintain their own voltage and frequency references, making them ideal for islanded operation and weak grid conditions.</p>
+                    
+                    <h2>Understanding Grid-Forming Technology</h2>
+                    <p>The fundamental difference between grid-following and grid-forming inverters lies in their control philosophy. Grid-following inverters act as current sources, injecting power into an established grid, while grid-forming inverters act as voltage sources, capable of creating and maintaining the grid itself.</p>
+                    
+                    <h3>Key Advantages</h3>
+                    <p>Grid-forming inverters offer several advantages including improved system stability, black-start capability, and enhanced fault ride-through performance. These characteristics make them particularly valuable in microgrids and systems with high renewable penetration.</p>
+                    
+                    <h2>Challenges and Solutions</h2>
+                    <p>Despite their advantages, grid-forming inverters face challenges including increased complexity, higher costs, and the need for sophisticated control algorithms. Research is ongoing to address these challenges and make the technology more accessible.</p>
+                    
+                    <p>As we move towards a more distributed and renewable energy future, grid-forming inverters will play a crucial role in maintaining system stability and reliability.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="post2" class="blog-post-detail">
+        <div class="container">
+            <div class="content-section">
+                <a href="#" onclick="showSection('blog')" class="back-to-blog">← Back to Blog Posts</a>
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Short-Circuit Analysis in Microgrids</h1>
+                    <div class="blog-post-meta">Published on November 28, 2024 by Akshay Yadav</div>
+                </div>
+                <div class="blog-post-content">
+                    <p>The increasing adoption of microgrids presents unique challenges for short-circuit analysis and protection. Traditional protection schemes designed for utility-scale systems may not be adequate for the dynamic and diverse nature of microgrids.</p>
+                    
+                    <h2>Unique Characteristics of Microgrid Faults</h2>
+                    <p>Microgrid short-circuit behavior differs significantly from traditional power systems due to the presence of inverter-based resources, which have current-limiting capabilities that affect fault current magnitude and duration.</p>
+                    
+                    <h3>Protection Challenges</h3>
+                    <p>The bi-directional power flow, varying short-circuit levels, and operational mode changes (grid-connected vs. islanded) create complex protection requirements that traditional schemes struggle to address.</p>
+                    
+                    <h2>Modern Solutions</h2>
+                    <p>Adaptive protection schemes, communication-based protection, and advanced relay settings are being developed to address these challenges. My research focuses on optimizing these solutions for real-world applications.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="post3" class="blog-post-detail">
+        <div class="container">
+            <div class="content-section">
+                <a href="#" onclick="showSection('blog')" class="back-to-blog">← Back to Blog Posts</a>
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">DIgSILENT PowerFactory: Best Practices</h1>
+                    <div class="blog-post-meta">Published on November 10, 2024 by Akshay Yadav</div>
+                </div>
+                <div class="blog-post-content">
+                    <p>DIgSILENT PowerFactory is a powerful tool for power system analysis, but maximizing its potential requires understanding best practices and avoiding common pitfalls. Here are insights from my extensive experience with the software.</p>
+                    
+                    <h2>Model Building Best Practices</h2>
+                    <p>Start with a clear system understanding and build models incrementally. Use consistent naming conventions and organize your network hierarchically for better maintainability.</p>
+                    
+                    <h3>Simulation Setup</h3>
+                    <p>Proper initialization is crucial for convergence. Pay attention to load flow settings, initialization methods, and time step selection for dynamic simulations.</p>
+                    
+                    <h2>Advanced Features</h2>
+                    <p>Leverage PowerFactory's scripting capabilities for repetitive tasks and automated studies. Use DPL (DIgSILENT Programming Language) for custom models and complex analysis workflows.</p>
+                    
+                    <h3>Performance Optimization</h3>
+                    <p>For large networks, consider using equivalent models for distant areas and optimize solver settings based on your specific analysis requirements.</p>
+                    
+                    <p>These practices have significantly improved my simulation efficiency and result accuracy throughout my research and professional work.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="content-section">
+                <h2 class="section-title">Contact Me</h2>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3 style="margin-bottom: 1.5rem; color: #4c63d2;">Get In Touch</h3>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <strong>Email</strong><br>
+                                yadavakshay0052@gmail.com
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div>
+                                <strong>Phone</strong><br>
+                                +49 15223745202
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">💼</div>
+                            <div>
+                                <strong>LinkedIn</strong><br>
+                                linkedin.com/in/akshay-yadav-45b7a5141
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <strong>Location</strong><br>
+                                Munich, Bavaria, Germany
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <h3 style="margin-bottom: 1.5rem; color: #333;">Send Message</h3>
+                        <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" placeholder="Enter subject">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Message <span class="required">*</span></label>
+                                <textarea id="message" name="message" required placeholder="Your message here..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn" id="submitBtn">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navigation functionality
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Hide all blog post details
+            const blogPosts = document.querySelectorAll('.blog-post-detail');
+            blogPosts.forEach(post => {
+                post.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Blog post functionality
+        function showBlogPost(postId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Hide all blog post details
+            const blogPosts = document.querySelectorAll('.blog-post-detail');
+            blogPosts.forEach(post => {
+                post.classList.remove('active');
+            });
+            
+            // Show selected blog post
+            document.getElementById(postId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Blog post filtering
+        function filterPosts(category) {
+            const posts = document.querySelectorAll('.blog-post');
+            const buttons = document.querySelectorAll('.category-btn');
+            
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter posts
+            posts.forEach(post => {
+                if (category === 'all' || post.dataset.category === category) {
+                    post.style.display = 'block';
+                    post.style.animation = 'fadeInUp 0.5s ease forwards';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        }
+
+        // Contact form handling with better error handling and user feedback
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const form = document.getElementById('contactForm');
+            
+            // Get form data
+            const subject = document.getElementById('subject').value || 'Contact from Portfolio Website';
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            // Validate required fields
+            if (!email) {
+                alert('Please enter your email address.');
+                document.getElementById('email').focus();
+                return;
+            }
+            
+            if (!message) {
+                alert('Please enter your message.');
+                document.getElementById('message').focus();
+                return;
+            }
+            
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                document.getElementById('email').focus();
+                return;
+            }
+            
+            // Disable submit button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Opening Email Client...';
+            
+            try {
+                // Create comprehensive email body
+                const emailBody = `Hello Akshay,
+
+I am reaching out through your portfolio website.
+
+From: ${email}
+Subject: ${subject}
+
+Message:
+${message}
+
+Best regards`;
+                
+                // Create mailto link with proper encoding
+                const mailtoLink = `mailto:yadavakshay0052@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+                
+                // Try to open the email client
+                const link = document.createElement('a');
+                link.href = mailtoLink;
+                link.target = '_blank';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Show success message and reset form
+                setTimeout(() => {
+                    alert('Email client opened successfully! Please send the email from your email application.\n\nIf your email client didn\'t open, you can manually send an email to: yadavakshay0052@gmail.com');
+                    form.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Message';
+                }, 500);
+                
+            } catch (error) {
+                console.error('Error opening email client:', error);
+                
+                // Fallback: show email details for manual sending
+                alert(`Email client could not be opened automatically.\n\nPlease send your message manually to:\nEmail: yadavakshay0052@gmail.com\nSubject: ${subject}\n\nYour message has been copied for convenience.`);
+                
+                // Try to copy message to clipboard as fallback
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(`Subject: ${subject}\n\nFrom: ${email}\n\nMessage:\n${message}`).catch(() => {
+                        console.log('Could not copy to clipboard');
+                    });
+                }
+                
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Try Again';
+            }
+        }
+
+        // Smooth scrolling and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth animations to content sections when they become visible
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationDelay = '0s';
+                        entry.target.style.animationFillMode = 'forwards';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all content sections
+            const contentSections = document.querySelectorAll('.content-section');
+            contentSections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Add typing effect to hero title
+            const heroTitle = document.querySelector('.hero-title');
+            if (heroTitle) {
+                const text = heroTitle.textContent;
+                heroTitle.textContent = '';
+                let i = 0;
+                
+                setTimeout(() => {
+                    const typeWriter = () => {
+                        if (i < text.length) {
+                            heroTitle.textContent += text.charAt(i);
+                            i++;
+                            setTimeout(typeWriter, 100);
+                        }
+                    };
+                    typeWriter();
+                }, 1000);
+            }
+        });
+
+        // Add particle animation to hero section
+        function createParticles() {
+            const hero = document.getElementById('about');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = '2px';
+                particle.style.height = '2px';
+                particle.style.background = 'rgba(255, 255, 255, 0.5)';
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animation = `float ${3 + Math.random() * 4}s linear infinite`;
+                particle.style.animationDelay = Math.random() * 4 + 's';
+                particle.style.zIndex = '1';
+                hero.appendChild(particle);
+            }
+        }
+
+        // Add floating animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0; }
+                10%, 90% { opacity: 1; }
+                25% { transform: translateY(-10px) translateX(5px); }
+                50% { transform: translateY(-20px) translateX(-5px); }
+                75% { transform: translateY(-10px) translateX(3px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize particles
+        setTimeout(createParticles, 1000);
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.backdropFilter = 'blur(15px)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.backdropFilter = 'blur(10px)';
+            }
+        });
+
+        // Add hover effects to timeline items
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.querySelector('.timeline-content').style.transform = 'scale(1.05)';
+                    this.querySelector('.timeline-content').style.transition = 'transform 0.3s ease';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.querySelector('.timeline-content').style.transform = 'scale(1)';
+                });
+            });
+        });
+
+        // Add interactive skill tags
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillTags = document.querySelectorAll('.skill-tag');
+            skillTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.1)';
+                    this.style.boxShadow = '0 5px 15px rgba(76, 99, 210, 0.4)';
+                    
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                        this.style.boxShadow = 'none';
+                    }, 200);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
